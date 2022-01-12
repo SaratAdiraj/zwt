@@ -1,0 +1,18 @@
+## BUILDING OTHER PLATFORMS (EG., SE/DESKTOP)
+(for windows) dir /s /b src-se\*.java src-common\*.java > sources.txt
+(*nix) find -name "*.java" > sources.txt
+javac -d build @sources.txt  
+jar cf libs\zwt-se.jar -C build .
+
+## BUILDING FOR WEB PLATFORM
+(for windows) dir /s /b src-web\*.java src-common\*.java > sources.txt
+(*nix) find -name "*.java" > sources.txt
+javac --add-modules bytecoder.api,bytecoder.web -p modules -d build @sources.txt 
+jar cf libs\zwt-web.jar -C build .
+
+## SAMPLE WEB APPLICATION PROGRAM USING WEB PLATFORM
+javac --add-modules bytecoder.api,bytecoder.web -p . -d . HelloWorld.java
+javac --add-modules zwt-web -p libs HelloWorld.java
+java -jar bytecoder-cli-0-SNAPSHOT-executable.jar -classpath=. -mainclass=bytecodertest.HelloWorld -builddirectory=. -backend=js -minify=false
+java -jar bytecoder-cli-0-SNAPSHOT-executable.jar -classpath=. -mainclass=bytecodertest.HelloWorld -builddirectory=. -backend=wasm
+
