@@ -4,7 +4,7 @@
 javac -d build @sources.txt  
 jar cf libs\zwt-se.jar -C build .
 
-## BUILDING FOR WEB PLATFORM
+## BUILDING FOR WEB PLATFORM (using https://github.com/SaratAdiraj/WAVM)
 (for windows) dir /s /b src-web\*.java src-common\*.java > sources.txt
 (*nix) find -name "*.java" > sources.txt
 javac --add-modules bytecoder.api,bytecoder.web -p modules -d build @sources.txt 
